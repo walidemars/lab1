@@ -14,9 +14,10 @@ void thirdProgram() {
     obmen1(a, b);
     cout << "после обмена 1: a = " << a << " b = " << b << endl;
 
+    a = 2; b = 5;
     obmen2(&a, &b);
     cout << "после обмена 2: a = " << a << " b = " << b << endl;
-
+    a = 2; b = 5;
     obmen3(a, b);
     cout << "после обмена 3: a = " << a << " b = " << b << endl;
 }
