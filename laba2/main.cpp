@@ -47,11 +47,13 @@ int main() {
     float sumLowerPartOfMatrix(float*, int);
     float sumHigherPartOfMatrix(float*, int);
 
+    float findClosestValToAverage(float*, int, float);
+
     //srand(time(0));
 
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
-            m[i][j] = rand()/10;
+            m[i][j] = rand()/100;
         }
     }
 
@@ -97,75 +99,107 @@ int main() {
     float sumLower = sumLowerPartOfMatrix(&m[0][0], N);
     float sumHigher = sumHigherPartOfMatrix(&m[0][0], N);
 
-    cout << "Минимум " << min << endl;
-    cout << "Максимум " << max << endl;
+    float val = findClosestValToAverage(&m[0][0], N, average);
 
-    cout << "Максимум нижнетреугольной части " << maxLowerPart << endl;
+    cout << "Минимум " << min << '\n' << endl;
+    cout << "Максимум " << max << '\n' << endl;
+
+    cout << "Максимум нижнетреугольной части " << maxLowerPart << '\n' << endl;
     cout << "Максимум верхнетреугольной части " << maxHigherPart << endl;
 
-    cout << "Минимум нижнетреугольной части " << minLowerPart << endl;
-    cout << "Минимум верхнетреугольной части " << minHigherPart << endl;
+    cout << "Минимум нижнетреугольной части " << minLowerPart << '\n' << endl;
+    cout << "Минимум верхнетреугольной части " << minHigherPart << '\n' << endl;
 
-    cout << "Минимум главной диагонали " << minMainDiag << endl;
-    cout << "Максимум главной диагонали " << maxMainDiag << endl;
+    cout << "Минимум главной диагонали " << minMainDiag << '\n' << endl;
+    cout << "Максимум главной диагонали " << maxMainDiag << '\n' << endl;
 
-    cout << "Минимум второстепенной диагонали " << minSecDiag << endl;
-    cout << "Максимум второстепенной диагонали " << maxSecDiag << endl;
+    cout << "Минимум второстепенной диагонали " << minSecDiag << '\n' << endl;
+    cout << "Максимум второстепенной диагонали " << maxSecDiag << '\n' << endl;
 
-    cout << "Среднеарифметическое значение элементов матрицы " << average << endl;
+    cout << "Среднеарифметическое значение элементов матрицы " << average << '\n' << endl;
 
-    cout << "Среднеарифметическое значение элементов нижнетреугольной части матрицы " << averageLower << endl;
-    cout << "Среднеарифметическое значение элементов верхнетреугольной части матрицы " << averageHigher << endl;
+    cout << "Среднеарифметическое значение элементов нижнетреугольной части матрицы " << averageLower << '\n' << endl;
+    cout << "Среднеарифметическое значение элементов верхнетреугольной части матрицы " << averageHigher << '\n' << endl;
 
-    cout << "Сумма значений элементов нижнетреугольной части матрицы " << sumLower << endl;
-    cout << "Сумма значений значение элементов верхнетреугольной части матрицы " << sumHigher << endl;
+    cout << "Сумма значений элементов нижнетреугольной части матрицы " << sumLower << '\n' << endl;
+    cout << "Сумма значений значение элементов верхнетреугольной части матрицы " << sumHigher << '\n' << endl;
 
     cout << "Суммы по строкам " << endl;
     for(i = 0; i < N; i++) {
         cout << "Строка " << i + 1 << ": " << sumRow[i] << endl;
     }
     delete[] sumRow;
+    cout << endl;
     cout << "Суммы по столбцам " << endl;
     for(i = 0; i < N; i++) {
         cout << "Столбец " << i + 1 << ": " << sumColumn[i] << endl;
     }
     delete[] sumColumn;
+    cout << endl;
 
     cout << "Минимальные значения строк " << endl;
     for(i = 0; i < N; i++) {
         cout << "Строка " << i + 1 << ": " << minRow[i] << endl;
     }
     delete[] minRow;
+    cout << endl;
     cout << "Минимальные значения столбцов " << endl;
     for(i = 0; i < N; i++) {
         cout << "Столбец " << i + 1 << ": " << minColumn[i] << endl;
     }
     delete[] minColumn;
+    cout << endl;
 
     cout << "Максимальные значения строк " << endl;
     for(i = 0; i < N; i++) {
         cout << "Строка " << i + 1 << ": " << maxRow[i] << endl;
     }
     delete[] maxRow;
+    cout << endl;
     cout << "Максимальные значения столбцов " << endl;
     for(i = 0; i < N; i++) {
         cout << "Столбец " << i + 1 << ": " << maxColumn[i] << endl;
     }
     delete[] maxColumn;
+    cout << endl;
 
     cout << "Среднеарифметические значения строк " << endl;
     for(i = 0; i < N; i++) {
         cout << "Строка " << i + 1 << ": " << averageRow[i] << endl;
     }
     delete[] averageRow;
+    cout << endl;
     cout << "Среднеарифметические значения столбцов " << endl;
     for(i = 0; i < N; i++) {
         cout << "Столбец " << i + 1 << ": " << averageColumn[i] << endl;
     }
     delete[] averageColumn;
+    cout << endl;
 
-    getch();
+    cout << "Элемент матрицы, значение которого наиболее близкое к среднему" << val << endl;
+
     return 0;
+}
+
+float findClosestValToAverage(float* matrix, int size, float average) {
+    float val;
+    float diff = average;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            int temp;
+            int currentVal = matrix[i * size + j];
+            if (currentVal < average) {
+                temp = average - currentVal;
+            } else {
+                temp = currentVal - average;
+            }
+            if (temp < diff) {
+                diff = temp;
+                val = currentVal;
+            }
+        }
+    }
+    return val;
 }
 
 float findMinMatrix(float* matrix, int size) {
