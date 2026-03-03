@@ -18,8 +18,6 @@ void enterString(char*, int);
 int main() {
     char *strings[5];
     int numStrings = 5;
-    char buffer[300] = "";
-    char temp[100];
 
     for (int i = 0; i < numStrings; i++) {
         strings[i] = (char*)calloc(100, sizeof(char));
