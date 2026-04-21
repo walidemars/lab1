@@ -1,6 +1,8 @@
 #ifndef LAB1_MYSTRING_H
 #define LAB1_MYSTRING_H
 
+#include "iostream"
+
 class MyString {
 private:
     char* str;
@@ -22,6 +24,9 @@ public:
     int length() const;
     void enterStr();
     void printStr() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const MyString& s);
+    friend std::istream& operator>>(std::istream& is, MyString& s);
 };
 
 #endif

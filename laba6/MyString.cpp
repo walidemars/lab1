@@ -125,3 +125,24 @@ void MyString::enterStr() {
 void MyString::printStr() const {
     cout << str;
 }
+
+ostream& operator<<(ostream& os, const MyString& s) {
+    os << s.str;
+    return os;
+}
+
+istream& operator>>(istream& is, MyString& s) {
+    char ch[1024];
+
+    is >> ch;
+
+    int len = dlina1(ch);
+    if (len >= s.size) {
+        delete[] s.str;
+        s.size = len + 1;
+        s.str = new char[s.size];
+    }
+
+    kopir(s.str, ch);
+    return is;
+}
